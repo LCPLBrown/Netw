@@ -6,3 +6,29 @@ FUNDAMENTALS
 32 = word
 64 = double word
 
+
+OSI MODEL 
+7 - appliction - data - DNS,HTTP,TELNET
+
+6 - presentation - data - SSL,TLS,JPEG,GIF
+deals with the Translating, Formatting, Encryption, and Compression of data
+
+5 - session - data - NetBIOS,PPTP, RPC, NFS
+maintain the state of your ongoing connections
+
+4 - transport - segment - TCP, UDP
+TCP - 
+UDP - 
+
+3 - network - packet - IP,ICMP,IGMP
+layer of internetworking is discussed and it’s parameters are defined
+[MTU - (IHL * 4)]/8 = offset
+IPv4, IPv6
+2 - data link - frames - PPP, ATM, 802.2/3 Ethernet, Frame Relay
+two hosts need to communicate across a common form of physical medium
+Sublayers -- MAC (Media Access Control) and LLC (Logical Link Control)
+Ethernet Header, ARP Header
+
+1 - physical - bits - Bluetooth, USB, 802.11 (Wi-Fi), DSL, 1000Base-T
+data is physically sent across the network as ones and zeros
+Hardware Specifications, ENcoding and Signaling, Data Transmission and Reception, Physical netwokr Design
