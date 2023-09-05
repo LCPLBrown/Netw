@@ -8,27 +8,45 @@ FUNDAMENTALS
 
 
 OSI MODEL 
-7 - appliction - data - DNS,HTTP,TELNET
+[7] - appliction - data - DNS,HTTP,TELNET
+FTP (TCP 20/21) -- Active and Passive
+SSH (TCP 22) -- Server, Clients, Sessions, Keys (User, Host, Session), Key Generator, Known-hosts database, Agent, Signer, Random Seed, Configuration File
+Telnet (TCP 23)    SMTP (TCP 25)    TACACS (TCP 49) SIMPLE/EXTENDED    DNS (QUERY/RESPONSE) (TCP/UDP 53)
+HTTP(S) (TCP 80/443)    POP (TCP 110)    IMAP (TCP 143)    RDP (TCP 3389)        DHCP (UDP 67/68)
+TFTP (UDP 69)    NTP (UDP 123)    SNMP (UDP 161/162)    RADIUS (UDP 1645/1646 AND 1812/1813)    RTP (UDP any above 1023)
 
-6 - presentation - data - SSL,TLS,JPEG,GIF
-deals with the Translating, Formatting, Encryption, and Compression of data
+[6] - presentation - data - SSL,TLS,JPEG,GIF
+Translating -- interoperability between encoding methods
+Formatting -- ASCII, EBCDIC, .doc, .ppt, .xls, mp3, wav, avi, mp4, bmp, jpeg, gif, tiff, or png
+Encryption >> 
+<<Symetric - AES, Blowfish, Twofish, DES, RC4
+<<Asymetric - PKI, Deffie-Hellman, DSS, RSA, Elliptic Curve
+Compression of data -- Zip, TAR, RAR, 7zip, CAB
 
-5 - session - data - NetBIOS,PPTP, RPC, NFS
+[5] - session - data - NetBIOS,PPTP, RPC, NFS
 maintain the state of your ongoing connections
+Socks 4/5 (TCP 1080)    RPC (Any Port)
+PPTP (TCP 1723)         L2TP (TCP 1701)
+SMB/CIFS (TCP 139/445 AND UDP 137/138) -- SMB resides over NetBios 
 
-4 - transport - segment - TCP, UDP
-TCP - 
-UDP - 
+[4] - transport - segment - TCP, UDP
+TCP - connection oriented protocol
+3-way Handshake -- SYN, SYN/ACK, ACK
+Data Transfer -- PSH/ACK, ACK
+4-way Termination -- FIN/ACK, ACK, FIN/ACK, ACK
+UDP - connectionless
+More lightweight and suited for latency sensitive applications, or applications that do not benefit from a stateful connection.
 
-3 - network - packet - IP,ICMP,IGMP
+[3] - network - packet - IP,ICMP,IGMP
 layer of internetworking is discussed and it’s parameters are defined
 [MTU - (IHL * 4)]/8 = offset
-IPv4, IPv6
-2 - data link - frames - PPP, ATM, 802.2/3 Ethernet, Frame Relay
+IPv4 - 1970's , IPv6 - 2011
+
+[2] - data link - frames - PPP, ATM, 802.2/3 Ethernet, Frame Relay
 two hosts need to communicate across a common form of physical medium
 Sublayers -- MAC (Media Access Control) and LLC (Logical Link Control)
 Ethernet Header, ARP Header
 
-1 - physical - bits - Bluetooth, USB, 802.11 (Wi-Fi), DSL, 1000Base-T
+[1] - physical - bits - Bluetooth, USB, 802.11 (Wi-Fi), DSL, 1000Base-T
 data is physically sent across the network as ones and zeros
 Hardware Specifications, ENcoding and Signaling, Data Transmission and Reception, Physical netwokr Design
