@@ -50,3 +50,37 @@ Ethernet Header, ARP Header
 [1] - physical - bits - Bluetooth, USB, 802.11 (Wi-Fi), DSL, 1000Base-T
 data is physically sent across the network as ones and zeros
 Hardware Specifications, ENcoding and Signaling, Data Transmission and Reception, Physical netwokr Design
+
+Layer 2 Switching Technologies
+Switch Operation -- Fast Forward, Fragment Free, Store and Forward
+Cam Table -- Learn (Source MAC), Forward (Destination)
+IEEE 802.1AD "Q-IN-Q" -- Standard (0x88A8), Non-Standard (0x9100)
+Spanning Tree Protocol >>
+<<Elect root bridge
+<<Identify root ports on non-root bridge
+<< Identify designated port
+<<Set alt ports to blocking
+Layer 2 Discovery Protocols -- CDP, FDP, LLDP
+Dynamic Trunking Protocol
+VLAN Trunking Protocol
+Port Security Modes -- Shutdown, Restrict, Protect
+
+BGP -- Road-map of Internet
+routes traffic between AS number
+Advertises IP CIDR Address Blocks
+Establishes peer relationships
+Complicated Configuration and slow path reaction
+Hijacking BGP -- Illegitimate advertising of addresses
+Propogates flase info
+Purpose is ..
+..stealing prefixes
+..monitoring traffic
+..intercept (possibly modify)
+..black holing traffic
+..performing MitM attacks
+Hijacking BGP Defense -- IP prefix filtering
+Hijacking detection..
+..Tracking change in TTL
+..Increased RTT, increases latency
+..Monitoring misdirected traffic 
+BGPSec
