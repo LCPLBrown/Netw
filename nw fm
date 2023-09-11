@@ -138,5 +138,6 @@ Testing/Avoiding specific defense mechanisms
 Obfuscating data
 Manually crafting a packet (chosen data in header)
 
-
+banner grab
+nc [ip] [port]
 
