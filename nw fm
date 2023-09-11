@@ -8,6 +8,7 @@ FUNDAMENTALS
 
 
 OSI MODEL 
+
 [7] - appliction - data - DNS,HTTP,TELNET
 FTP (TCP 20/21) -- Active and Passive
 SSH (TCP 22) -- Server, Clients, Sessions, Keys (User, Host, Session), Key Generator, Known-hosts database, Agent, Signer, Random Seed, Configuration File
@@ -55,11 +56,13 @@ Layer 2 Switching Technologies
 Switch Operation -- Fast Forward, Fragment Free, Store and Forward
 Cam Table -- Learn (Source MAC), Forward (Destination)
 IEEE 802.1AD "Q-IN-Q" -- Standard (0x88A8), Non-Standard (0x9100)
-Spanning Tree Protocol >>
+
+Spanning Tree Protocol (STP) >>
 <<Elect root bridge
 <<Identify root ports on non-root bridge
 << Identify designated port
 <<Set alt ports to blocking
+
 Layer 2 Discovery Protocols -- CDP, FDP, LLDP
 Dynamic Trunking Protocol
 VLAN Trunking Protocol
@@ -70,6 +73,7 @@ routes traffic between AS number
 Advertises IP CIDR Address Blocks
 Establishes peer relationships
 Complicated Configuration and slow path reaction
+
 Hijacking BGP -- Illegitimate advertising of addresses
 Propogates flase info
 Purpose is ..
@@ -78,9 +82,61 @@ Purpose is ..
 ..intercept (possibly modify)
 ..black holing traffic
 ..performing MitM attacks
+
 Hijacking BGP Defense -- IP prefix filtering
 Hijacking detection..
 ..Tracking change in TTL
 ..Increased RTT, increases latency
 ..Monitoring misdirected traffic 
 BGPSec
+
+Capture Library
+Libpcap
+WinPcap
+NPCAP
+
+sudo tcpdump -i eth0 -XXvvn 'not port 22'
+
+Berkeley Packet Filters
+Requests SOC_RAW, setsockopt calls SO_ATTACH_FILTER
+
+tcpdump {A} [B:C] {D} {E} {F} {G}
+
+A = Protocol (ether | arp | ip | ip6 | icmp | tcp | udp)
+B = Header Byte offset
+C = optional: Byte Length. Can be 1, 2 or 4 (default 1)
+D = optional: Bitwise mask (&)
+E = Operator (= | == | > | < | <= | >= | != | () | << | >>)
+F = Result of Expresion
+G = optional: Logical Operator (&& ||) to bridge expressions
+tcpdump 'ether[12:2] = 0x0800 && (tcp[2:2] != 22 &&)'
+
+-User Space Sockets-
+Stream Sockets
+Datagram Sockets
+-applications-
+tcpdump  nmap  wireshark  netcat  /dev/tcp /dev/udp
+
+-Kernel Space Sockets- (sudo required)
+Raw Sockets
+-applicatons-
+tcpdump/wireshark on wire  nmap for os id or to set specific flags  netcat listener  scapy
+
+
+s = socket.socket(socket.FAMILY, socket.TYPE, socket.PROTOCOL)
+socket.socket([*family*[,*type*[*proto*]]])
+family -AF_INET, AF_INET6, AF_UNIX
+type -SOCK_STREAM, SOCK_DGRAM, SOCK_RAW
+proto -0, IPPROTO_RAW (only necessary for sock_raw)
+
+Raw Sockets
+
+Must include ip header and next header
+requires guidance from RFC 
+RFCs- technical and organized documents 
+Testing/Avoiding specific defense mechanisms
+Obfuscating data
+Manually crafting a packet (chosen data in header)
+
+
+
