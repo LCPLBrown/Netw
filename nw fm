@@ -120,7 +120,7 @@ tcpdump  nmap  wireshark  netcat  /dev/tcp /dev/udp
 -Kernel Space Sockets- (sudo required)
 Raw Sockets
 -applicatons-
-tcpdump/wireshark on wire  nmap for os id or to set specific flags  netcat listener  scapy
+tcpdump/wireshark on wire,  nmap for os id or to set specific flags,  netcat listener,  scapy
 
 
 s = socket.socket(socket.FAMILY, socket.TYPE, socket.PROTOCOL)
@@ -130,7 +130,6 @@ type -SOCK_STREAM, SOCK_DGRAM, SOCK_RAW
 proto -0, IPPROTO_RAW (only necessary for sock_raw)
 
 Raw Sockets
-
 Must include ip header and next header
 requires guidance from RFC 
 RFCs- technical and organized documents 
@@ -139,7 +138,7 @@ Obfuscating data
 Manually crafting a packet (chosen data in header)
 
 banner grab
-nc [ip] [port]
+nc [ip] [port] (-u for UDP port)
 
 curl [url or ip[port]] 
 wget [url or ip[port]]/filename
@@ -149,3 +148,29 @@ sudo nmap -sU <IP> -T4 -p<port> -A
 PC1 -- nc -lp <port>
 PC2 -- nc <PC1 IP><port> 0<pipe |nc <PC3 IP><port> |>pipe
 PC3 -- nc -lp <port>
+
+FTP data(20) control(21) PW
+active and passive
+
+SFTP (TCP 22) PW
+FTPS (TCP 443) PW
+
+SCP (TCP 22) PW or SSH key --
+-download from remote to local dir [scp student@172.16.82.106:secretstuff.txt /home/student]
+-upload to a remote from a local dir [scp secretstuff.txt student@172.16.82.106:/home/student]
+-copy from remote host to a seperate remote host [scp -3 student@172.16.82.106:/home/student/secretstuff.txt student@172.16.82.112:/home/student]
+-scp <username>@<target IP>:<target filepath> <. or name of file at current location>
+-scp <source><destination>
+
+SCP w/ alt SSHD
+-download from remote to local dir [scp -P 1111 student@172.16.82.106:secretstuff.txt /home/student]
+-upload to a remote from a local dir [scp -P 1111 secretstuff.txt student@172.16.82.106:/home/student]
+
+SCP through tunnel
+[ssh student@172.16.82.106 -L 1111:localhost:22 -NT]
+-download from remote to local dir [scp -P 1111 student@localhost:secretstuff.txt /home/student]
+-upload to a remote from a local dir [scp -P 1111 secretstuff.txt student@localhost:/home/student]
+
+Netcat 
+Client (sends file): nc 10.2.0.2 9001 < file.txt
+Listener (receive file): nc -l -p 9001 > newfile.txt
