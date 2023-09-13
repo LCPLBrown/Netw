@@ -236,3 +236,12 @@ PC1 -------NO!------S1(22)----------S2(21,22,23,80)---------NO!-----------PC2(22
 1113-S1:1200
 9050-S2:*
 
+
+ssh <user>@<ip> -L <bind port>:<tgt IP>:<tgt port> -NT
+ssh <user>@<ip> -R <bind port>:<tgt IP>:<tgt port> -NT
+ssh <user>@<ip> -D 9050 -NT
+
+proxychains nmap <IP> -Pn -A -vvvv -T4
+wget -r 127.0.0.1:42200 (through a tunnel on 42200)
+41700-41799
+internet_host$ ssh netX_studentX@{T3_float_ip} -L NssXX:10.3.0.27:80 -NT
