@@ -434,4 +434,3 @@ Incorrect telent -- alert tcp any 23 -> any any (msg:"TELNET login incorrect"; c
 
 sudo snort -D -i eth0 -l /var/log/snort/ -c /etc/snort/snort.conf
 sudo snort -r /home/activity_resources/pcaps/ids.pcap (-c snort.rule)
-
