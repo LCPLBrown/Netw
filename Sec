@@ -1,1 +1,10 @@
 IMRrxRojZLL6NxU
+
+
+SQL
+Select - extracts data
+Union - Combine two or more select statements
+https://www.w3schools.com/SQL/sql_syntax.asp
+show databases;
+show sessions;
+SELECT * FROM session.car UNION SELECT tireid,name,size,cost,1,2 FROM session.Tires
