@@ -8,3 +8,17 @@ https://www.w3schools.com/SQL/sql_syntax.asp
 show databases;
 show sessions;
 SELECT * FROM session.car UNION SELECT tireid,name,size,cost,1,2 FROM session.Tires
+
+disass <FUNCTION>   #   Disassemble portion of the program
+info <...>  #   Supply info for specific stack areas
+x/256c $<REGISTER>  #   Read characters from specific register
+break <address>  #   Establish a break point
+info functions
+
+./func <<<$(echo "Hello World")
+./func $(echo "Hello World")
+pdisass main
+env - gdb ./func
+find /b 0xf7de1000, 0xffffe000, 0xff, 0xe4 - after heap to end of stack
+msfvenom -p linux/x86/exec CMD=ifconfig -b '\x00' -f python
+
